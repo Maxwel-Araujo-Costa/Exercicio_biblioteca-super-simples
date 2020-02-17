@@ -30,6 +30,21 @@ use Cake\Event\Event;
 class AppController extends Controller
 {
 
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        //$this->Auth->allow('add');
+        switch ($this->name) {
+            case 'Users':
+                $this->Auth->allow('login');
+                $this->Auth->allow('add');
+                break;
+            case 'Pages':
+                $this->Auth->allow('display');
+                break;
+        }
+    }
+
     /**
      * Initialization hook method.
      *

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Meios $meios
@@ -12,8 +13,8 @@
                 ['action' => 'delete', $meios->id],
                 ['confirm' => __('Are you sure you want to delete # {0}?', $meios->id)]
             )
-        ?></li>
-        <li><?= $this->Html->link(__('List Meioss'), ['action' => 'index']) ?></li>
+            ?></li>
+        <li><?= $this->Html->link(__('List Relations'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Books'), ['controller' => 'Books', 'action' => 'index']) ?></li>
@@ -23,10 +24,10 @@
 <div class="meioss form large-9 medium-8 columns content">
     <?= $this->Form->create($meios) ?>
     <fieldset>
-        <legend><?= __('Edit Meios') ?></legend>
+        <legend><?= __('Edit Relations') ?></legend>
         <?php
-            echo $this->Form->control('user_id', ['options' => $users]);
-            echo $this->Form->control('book_id', ['options' => $books]);
+        echo $this->Form->control('user_id', ['options' => $users]);
+        echo $this->Form->control('book_id', ['options' => $books]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
