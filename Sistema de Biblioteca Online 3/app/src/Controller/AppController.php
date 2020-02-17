@@ -19,6 +19,7 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 
+
 /**
  * Application Controller
  *
@@ -79,5 +80,14 @@ class AppController extends Controller
             // If unauthorized, return them to page they were just on
             'unauthorizedRedirect' => $this->referer()
         ]);
+    }
+    public function beforeRender(Event $event)
+    {
+        if (
+            !array_key_exists('_serialize', $this->viewVars) &&
+            in_array($this->response->type(), ['application/json', 'application/xml'])
+        ) {
+            $this->set('_serialize', true);
+        }
     }
 }

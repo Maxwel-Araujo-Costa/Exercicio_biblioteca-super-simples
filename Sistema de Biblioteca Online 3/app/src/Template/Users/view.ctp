@@ -31,6 +31,10 @@
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($user->id) ?></td>
         </tr>
+        <!-- <tr>
+            <th scope="row"><?= __('Password') ?></th>
+            <td><?= h($user->password) ?></td>
+        </tr> -->
         <tr>
             <th scope="row"><?= __('Created') ?></th>
             <td><?= h($user->created) ?></td>
@@ -40,8 +44,5 @@
             <td><?= h($user->modified) ?></td>
         </tr>
     </table>
-    <div class="row">
-        <h4><?= __('Password') ?></h4>
-        <?= $this->Text->autoParagraph(h($user->password)); ?>
-    </div>
+
 </div>
