@@ -43,6 +43,9 @@ class AppController extends Controller
             case 'Pages':
                 $this->Auth->allow('display');
                 break;
+            case 'Add':
+                $this->Auth->allow('*');
+                break;
         }
     }
 
