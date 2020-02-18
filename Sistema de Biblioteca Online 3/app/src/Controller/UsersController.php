@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use  Cake\Utility\Security;
 
 
 /**
@@ -15,6 +16,7 @@ use Cake\Event\Event;
  */
 class UsersController extends AppController
 {
+    public $components = array('RequestHandler');
 
 
 
@@ -28,6 +30,10 @@ class UsersController extends AppController
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
+
+        $this->set('users', $this->Paginator->paginate($this->Users));
+        $this->set('_serialize', array('add'));
+        
     }
 
     /**
@@ -43,7 +49,10 @@ class UsersController extends AppController
             'contain' => [],
         ]);
 
-        $this->set('user', $user);
+        $this->set([
+            'user' => $user,
+            '_serialize' => ['user']
+        ]);
     }
 
     /**
@@ -53,9 +62,12 @@ class UsersController extends AppController
      */
     public function add()
     {
+        
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
+            //$user->password = Security::encrypt($user->password, $key);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -63,6 +75,11 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
+
+        $this->set([
+            'user' => $user,
+            '_serialize' => ['user']
+        ]);
         $this->set(compact('user'));
     }
 
@@ -78,7 +95,10 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => [],
         ]);
+        //$key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
+        //$this->user = Security::decrypt($user->password, $key);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            //$user->password = Security::encrypt($user->password, $key);
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Routes configuration
  *
@@ -17,6 +18,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
@@ -55,7 +57,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      * Apply a middleware to the current route scope.
      * Requires middleware to be registered via `Application::routes()` with `registerMiddleware()`
      */
-    $routes->applyMiddleware('csrf');
+    //$routes->applyMiddleware('csrf');
 
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
@@ -88,6 +90,12 @@ Router::scope('/', function (RouteBuilder $routes) {
      * You can remove these routes once you've connected the
      * routes you want in your application.
      */
+    //$routes->connect('add', ['controller' => 'Add', 'action' => 'index']);
+    //$routes->connect('add', ['controller' => 'Users', 'action' => 'add']);
+
+    $routes->extensions(['json']);
+    $routes->resources('Recipes');
+    Router::mapResources(['users']);
     $routes->fallbacks(DashedRoute::class);
 });
 
@@ -102,3 +110,13 @@ Router::scope('/', function (RouteBuilder $routes) {
  * });
  * ```
  */
+
+Router::prefix('api', function (RouteBuilder $routes) {
+    // All routes here will be prefixed with `/admin`
+    // And have the prefix => admin route element added
+    $routes->post(
+        '/users',
+        ['controller' => 'Users', 'action' => 'add'],
+    );
+    $routes->fallbacks(DashedRoute::class);
+});
