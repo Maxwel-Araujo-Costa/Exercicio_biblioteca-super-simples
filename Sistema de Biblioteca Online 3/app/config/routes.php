@@ -90,7 +90,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      * You can remove these routes once you've connected the
      * routes you want in your application.
      */
-    //$routes->connect('add', ['controller' => 'Add', 'action' => 'index']);
+
     //$routes->connect('add', ['controller' => 'Users', 'action' => 'add']);
 
     $routes->extensions(['json']);

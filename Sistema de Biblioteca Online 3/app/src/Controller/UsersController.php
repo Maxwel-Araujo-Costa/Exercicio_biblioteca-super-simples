@@ -33,7 +33,6 @@ class UsersController extends AppController
 
         $this->set('users', $this->Paginator->paginate($this->Users));
         $this->set('_serialize', array('add'));
-        
     }
 
     /**
@@ -62,11 +61,11 @@ class UsersController extends AppController
      */
     public function add()
     {
-        
+
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-            $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
+            //$key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
             //$user->password = Security::encrypt($user->password, $key);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
